@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option go_package = "gophermart_protos/gen/services";
+
+service OrderService {
+  rpc CreateOrder(NewOrder) returns (NewOrderResponse);
+  rpc SearchOrders(SearchOrderParams) returns (SearchOrderResponse);
+}
+
+message SearchOrderParams {
+  int64 account_id = 1;
+}
+
+message SearchOrderResponse {
+  repeated Order orders = 1;
+}
+
+message NewOrder {
+  string uuid        = 1;
+  string number      = 2;
+  string state       = 3;
+  string uploaded_at = 4;
+  int64 account_id   = 5;
+}
+
+message Order {
+  string uuid        = 1;
+  string number      = 2;
+  string state       = 3;
+  int64 accrual      = 4;
+  string uploaded_at = 5;
+  int64 account_id   = 6;
+}
+
+message NewOrderResponse {}

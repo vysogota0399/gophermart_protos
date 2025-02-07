@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "gophermart_protos/gen/events";
+
+message OrderCreated {
+  string event_uuid  = 1;
+  string uuid        = 2;
+  string number      = 3;
+  string uploaded_at = 4;
+  string state       = 5;
+  int64 account_id   = 6;
+}
+
+message OrderUpdated {
+  string event_uuid  = 1;
+  string uuid        = 2;
+  string state       = 4;
+}
