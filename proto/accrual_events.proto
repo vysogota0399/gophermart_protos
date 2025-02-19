@@ -3,17 +3,20 @@ syntax = "proto3";
 option go_package = "gophermart_protos/gen/events";
 
 message AccrualStarted {
-  string event_uuid  = 1;
-  string order_uuid  = 2;
+  string event_uuid   = 1;
+  string order_uuid   = 2;
+  string order_number = 3;
 }
 
 message AccrualFinished {
-  string event_uuid  = 1;
-  string order_uuid  = 2;
-  int64 amount       = 3;
+  string event_uuid   = 1;
+  string order_uuid   = 2;
+  string order_number = 3;
+  int64 amount        = 4;
 }
 
 message AccrualFailed {
-  string event_uuid  = 1;
-  string order_uuid  = 2;
+  string event_uuid   = 1;
+  string order_number = 2;
+  string order_uuid   = 3;
 }
