@@ -12,8 +12,7 @@ message TransactionProcessed {
   string uuid                     = 2;
   int64 amount                    = 3;
   int64 account_id                = 4;
-  string order_uuid               = 5;
-  string order_number             = 6;
-  TransactionOperations operation = 7;
-  string ProcessedAt              = 8;
+  string order_number             = 5;
+  TransactionOperations operation = 6;
+  string ProcessedAt              = 7;
 }
