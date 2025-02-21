@@ -1,40 +1,65 @@
 version: '3'
 
 tasks:
-  generate_order_service:
-    desc: "Generate order services code from proto files"  
+  generate_order_command:
     cmds:
-      - protoc -I proto proto/order_service.proto --go_out=./gen/services/orders --go_opt=paths=source_relative --go-grpc_out=./gen/services/orders --go-grpc_opt=paths=source_relative
-        
+      - |
+       protoc -I proto \
+        commands/create_order/order_service.proto \
+        --go_out=./gen \
+        --go_opt=paths=source_relative \
+        --go-grpc_out=./gen \
+        --go-grpc_opt=paths=source_relative
 
-  generate_accounting_service:
-    desc: "Generate accounting services code from proto files"  
+  generate_withdraw_command:
     cmds:
-      - protoc -I proto proto/accounting_service.proto --go_out=./gen/services/accounting --go_opt=paths=source_relative --go-grpc_out=./gen/services/accounting --go-grpc_opt=paths=source_relative
+      - |
+       protoc -I proto proto/commands/withdraw/winthdraw_service.proto \
+        --go_out=./gen \
+        --go_opt=paths=source_relative \
+        --go-grpc_out=./gen \
+        --go-grpc_opt=paths=source_relative
 
-  generate_denormalized_order_service_service:
-    desc: "Generate denormalized_order_servicecode from proto files"  
+  generate_query_orders:
     cmds:
-      - protoc -I proto proto/denormalized_order_service.proto --go_out=./gen/services/denormalized_order --go_opt=paths=source_relative --go-grpc_out=./gen/services/denormalized_order --go-grpc_opt=paths=source_relative
-    
-  generate_events:
-    desc: "Generate events code from proto files"  
+      - |
+       protoc -I proto \
+          queries/orders/query_orders.proto \
+        --go_out=./gen \
+        --go_opt=paths=source_relative \
+        --go-grpc_out=./gen \
+        --go-grpc_opt=paths=source_relative
+
+  generate_query_accounting:
     cmds:
-      - protoc -I proto proto/order_events.proto --go_out=./gen/events --go_opt=paths=source_relative
+      - |
+       protoc -I proto \
+          queries/accounting/query_accounting.proto \
+        --go_out=./gen \
+        --go_opt=paths=source_relative \
+        --go-grpc_out=./gen \
+        --go-grpc_opt=paths=source_relative
 
-  generate_accrual_events:
-    desc: "Generate Accrual events code from proto files"  
+  generate_transaction_processed_event:
     cmds:
-      - protoc -I proto proto/accrual_events.proto --go_out=./gen/events --go_opt=paths=source_relative
-
-
-  generate_accounting_events:
-    desc: "Generate accounting events code from proto files"  
-    cmds:
-      - protoc -I proto proto/accounting_events.proto --go_out=./gen/events --go_opt=paths=source_relative
-
+      - |
+       protoc -I proto \
+        events/transaction_processed_event.proto \
+        --go_out=./gen \
+        --go_opt=paths=source_relative
 
   generate_order_events:
-    desc: "Generate order events code from proto files"  
     cmds:
-      - protoc -I proto proto/order_events.proto --go_out=./gen/events --go_opt=paths=source_relative
+      - |
+       protoc -I proto \
+        events/order_events.proto \
+        --go_out=./gen \
+        --go_opt=paths=source_relative
+
+  generate_accrual_events:
+    cmds:
+      - |
+       protoc -I proto \
+        events/accrual_events.proto \
+        --go_out=./gen \
+        --go_opt=paths=source_relative
