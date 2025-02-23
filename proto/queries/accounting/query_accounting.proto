@@ -13,8 +13,8 @@ message BalanceParams {
 }
 
 message BalanceResponse {
-  int64 balance     = 1;
-  int64 withdrawn   = 2;
+  double balance     = 1;
+  double withdrawn   = 2;
 }
 
 message GetWithdrawalsParams {
@@ -23,7 +23,7 @@ message GetWithdrawalsParams {
 
 message Withdrawal {
   string order_number = 1;
-  int64 sum           = 2;
+  double sum          = 2;
   string processed_at = 3;
 }
 
