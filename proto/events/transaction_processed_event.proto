@@ -14,5 +14,5 @@ message TransactionProcessed {
   int64 account_id                = 4;
   string order_number             = 5;
   TransactionOperations operation = 6;
-  string ProcessedAt              = 7;
+  string processed_at             = 7;
 }
