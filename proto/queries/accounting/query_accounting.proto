@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "gophermart_protos/gen/queries/accounting";
+
+
+service QueryAccounting{
+  rpc GetBalance(BalanceParams) returns (BalanceResponse);
+  rpc GetWithdrawals(GetWithdrawalsParams) returns (GetWithdrawalsResponse);
+}
+
+message BalanceParams {
+  int64 account_id = 1;
+}
+
+message BalanceResponse {
+  double balance     = 1;
+  double withdrawn   = 2;
+}
+
+message GetWithdrawalsParams {
+  int64 account_id = 1;
+}
+
+message Withdrawal {
+  string order_number = 1;
+  double sum          = 2;
+  string processed_at = 3;
+}
+
+message GetWithdrawalsResponse {
+  repeated Withdrawal withdrawals = 1;
+}

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "gophermart_protos/gen/queries/orders";
+
+service QueryOrders {
+  rpc OrdersCollection(QueryOrdersParams) returns (QureyOrdersResponse);
+}
+
+message QueryOrdersParams {
+  int64 account_id = 1;
+}
+
+message QureyOrdersResponse {
+  repeated Order orders = 1;
+}
+
+message Order {
+  string uuid        = 1;
+  string number      = 2;
+  string state       = 3;
+  double accrual     = 4;
+  string uploaded_at = 5;
+  int64 account_id   = 6;
+}

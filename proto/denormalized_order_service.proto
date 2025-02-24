@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "gophermart_protos/gen/services";
+
+service DenormalizedOrderService {
+  rpc OrderDetails(OrderDetailsRequest) returns (DenormalizedOrder);
+}
+
+message OrderDetailsRequest{
+  string order_number = 1;
+}
+
+message DenormalizedOrder {
+  message Product {
+    string name = 1;
+    int64 price = 2;
+  }
+  
+  repeated Product goods = 1;
+  string number = 2;
+}
