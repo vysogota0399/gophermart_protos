@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package commands.withdraw;
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/commands/withdraw";
+
+import "proto/commands/withdraw/do_withdraw_params.proto";
+import "google/protobuf/empty.proto";
+
+service WithdrawService {
+  rpc DoWithdraw(DoWithdrawParams) returns (google.protobuf.Empty);
+}

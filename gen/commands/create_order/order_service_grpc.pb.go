@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: commands/create_order/order_service.proto
+// source: proto/commands/create_order/order_service.proto
 
 package create_order
 
@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,14 +20,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CreateOrderService_Create_FullMethodName = "/CreateOrderService/Create"
+	CreateOrderService_Create_FullMethodName = "/commands.create_order.CreateOrderService/Create"
 )
 
 // CreateOrderServiceClient is the client API for CreateOrderService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CreateOrderServiceClient interface {
-	Create(ctx context.Context, in *NewOrder, opts ...grpc.CallOption) (*NewOrderResponse, error)
+	Create(ctx context.Context, in *CreateNewOrderParams, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type createOrderServiceClient struct {
@@ -37,9 +38,9 @@ func NewCreateOrderServiceClient(cc grpc.ClientConnInterface) CreateOrderService
 	return &createOrderServiceClient{cc}
 }
 
-func (c *createOrderServiceClient) Create(ctx context.Context, in *NewOrder, opts ...grpc.CallOption) (*NewOrderResponse, error) {
+func (c *createOrderServiceClient) Create(ctx context.Context, in *CreateNewOrderParams, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(NewOrderResponse)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, CreateOrderService_Create_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -51,7 +52,7 @@ func (c *createOrderServiceClient) Create(ctx context.Context, in *NewOrder, opt
 // All implementations must embed UnimplementedCreateOrderServiceServer
 // for forward compatibility.
 type CreateOrderServiceServer interface {
-	Create(context.Context, *NewOrder) (*NewOrderResponse, error)
+	Create(context.Context, *CreateNewOrderParams) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCreateOrderServiceServer()
 }
 
@@ -62,7 +63,7 @@ type CreateOrderServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCreateOrderServiceServer struct{}
 
-func (UnimplementedCreateOrderServiceServer) Create(context.Context, *NewOrder) (*NewOrderResponse, error) {
+func (UnimplementedCreateOrderServiceServer) Create(context.Context, *CreateNewOrderParams) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedCreateOrderServiceServer) mustEmbedUnimplementedCreateOrderServiceServer() {}
@@ -87,7 +88,7 @@ func RegisterCreateOrderServiceServer(s grpc.ServiceRegistrar, srv CreateOrderSe
 }
 
 func _CreateOrderService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(NewOrder)
+	in := new(CreateNewOrderParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -99,7 +100,7 @@ func _CreateOrderService_Create_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: CreateOrderService_Create_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CreateOrderServiceServer).Create(ctx, req.(*NewOrder))
+		return srv.(CreateOrderServiceServer).Create(ctx, req.(*CreateNewOrderParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -108,7 +109,7 @@ func _CreateOrderService_Create_Handler(srv interface{}, ctx context.Context, de
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CreateOrderService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "CreateOrderService",
+	ServiceName: "commands.create_order.CreateOrderService",
 	HandlerType: (*CreateOrderServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -117,5 +118,5 @@ var CreateOrderService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "commands/create_order/order_service.proto",
+	Metadata: "proto/commands/create_order/order_service.proto",
 }

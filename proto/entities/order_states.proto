@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package entities;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/entities";
+
+enum OrderStates {
+  ORDER_STATES_REGISTERED = 0;
+  ORDER_STATES_INVALID    = 1;
+  ORDER_STATES_PROCESSING = 2;
+  ORDER_STATES_PROCESSED  = 3;
+}

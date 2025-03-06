@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: queries/accounting/query_accounting.proto
+// source: proto/queries/accounting/query_accounting.proto
 
 package accounting
 
@@ -19,15 +19,15 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	QueryAccounting_GetBalance_FullMethodName     = "/QueryAccounting/GetBalance"
-	QueryAccounting_GetWithdrawals_FullMethodName = "/QueryAccounting/GetWithdrawals"
+	QueryAccounting_GetBalance_FullMethodName     = "/queries.accounting.QueryAccounting/GetBalance"
+	QueryAccounting_GetWithdrawals_FullMethodName = "/queries.accounting.QueryAccounting/GetWithdrawals"
 )
 
 // QueryAccountingClient is the client API for QueryAccounting service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type QueryAccountingClient interface {
-	GetBalance(ctx context.Context, in *BalanceParams, opts ...grpc.CallOption) (*BalanceResponse, error)
+	GetBalance(ctx context.Context, in *GetBalanceParams, opts ...grpc.CallOption) (*GetBalanceResponse, error)
 	GetWithdrawals(ctx context.Context, in *GetWithdrawalsParams, opts ...grpc.CallOption) (*GetWithdrawalsResponse, error)
 }
 
@@ -39,9 +39,9 @@ func NewQueryAccountingClient(cc grpc.ClientConnInterface) QueryAccountingClient
 	return &queryAccountingClient{cc}
 }
 
-func (c *queryAccountingClient) GetBalance(ctx context.Context, in *BalanceParams, opts ...grpc.CallOption) (*BalanceResponse, error) {
+func (c *queryAccountingClient) GetBalance(ctx context.Context, in *GetBalanceParams, opts ...grpc.CallOption) (*GetBalanceResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BalanceResponse)
+	out := new(GetBalanceResponse)
 	err := c.cc.Invoke(ctx, QueryAccounting_GetBalance_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -63,7 +63,7 @@ func (c *queryAccountingClient) GetWithdrawals(ctx context.Context, in *GetWithd
 // All implementations must embed UnimplementedQueryAccountingServer
 // for forward compatibility.
 type QueryAccountingServer interface {
-	GetBalance(context.Context, *BalanceParams) (*BalanceResponse, error)
+	GetBalance(context.Context, *GetBalanceParams) (*GetBalanceResponse, error)
 	GetWithdrawals(context.Context, *GetWithdrawalsParams) (*GetWithdrawalsResponse, error)
 	mustEmbedUnimplementedQueryAccountingServer()
 }
@@ -75,7 +75,7 @@ type QueryAccountingServer interface {
 // pointer dereference when methods are called.
 type UnimplementedQueryAccountingServer struct{}
 
-func (UnimplementedQueryAccountingServer) GetBalance(context.Context, *BalanceParams) (*BalanceResponse, error) {
+func (UnimplementedQueryAccountingServer) GetBalance(context.Context, *GetBalanceParams) (*GetBalanceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBalance not implemented")
 }
 func (UnimplementedQueryAccountingServer) GetWithdrawals(context.Context, *GetWithdrawalsParams) (*GetWithdrawalsResponse, error) {
@@ -103,7 +103,7 @@ func RegisterQueryAccountingServer(s grpc.ServiceRegistrar, srv QueryAccountingS
 }
 
 func _QueryAccounting_GetBalance_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(BalanceParams)
+	in := new(GetBalanceParams)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -115,7 +115,7 @@ func _QueryAccounting_GetBalance_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: QueryAccounting_GetBalance_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryAccountingServer).GetBalance(ctx, req.(*BalanceParams))
+		return srv.(QueryAccountingServer).GetBalance(ctx, req.(*GetBalanceParams))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -142,7 +142,7 @@ func _QueryAccounting_GetWithdrawals_Handler(srv interface{}, ctx context.Contex
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var QueryAccounting_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "QueryAccounting",
+	ServiceName: "queries.accounting.QueryAccounting",
 	HandlerType: (*QueryAccountingServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -155,5 +155,5 @@ var QueryAccounting_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "queries/accounting/query_accounting.proto",
+	Metadata: "proto/queries/accounting/query_accounting.proto",
 }

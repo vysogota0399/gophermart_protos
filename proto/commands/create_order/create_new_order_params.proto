@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package commands.create_order;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/commands/create_order";
+
+import "proto/common/uuid.proto";
+import "google/protobuf/timestamp.proto";
+import "proto/entities/account.proto";
+
+message CreateNewOrderParams {
+  common.Uuid uuid                      = 1;
+  string number                         = 2;
+  google.protobuf.Timestamp uploaded_at = 4;
+  entities.Account account              = 5;
+}

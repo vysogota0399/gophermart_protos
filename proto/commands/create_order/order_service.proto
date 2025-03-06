@@ -1,17 +1,12 @@
 syntax = "proto3";
 
-option go_package = "gophermart_protos/gen/commands/create_order";
+package commands.create_order;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/commands/create_order";
+
+import "proto/commands/create_order/create_new_order_params.proto";
+import "google/protobuf/empty.proto";
 
 service CreateOrderService {
-  rpc Create(NewOrder) returns (NewOrderResponse);
+  rpc Create(CreateNewOrderParams) returns (google.protobuf.Empty);
 }
-
-message NewOrder {
-  string uuid        = 1;
-  string number      = 2;
-  string state       = 3;
-  string uploaded_at = 4;
-  int64 account_id   = 5;
-}
-
-message NewOrderResponse {}

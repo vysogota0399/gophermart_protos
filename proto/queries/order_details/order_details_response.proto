@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package queries.order_details;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/queries/order_details";
+
+import "vendor/github.com/googleapis/google/type/money.proto";
+
+message OrderDetailsResponse {
+  message Product {
+    string name             = 1;
+    google.type.Money price = 2;
+  }
+  
+  repeated Product goods = 1;
+  string number          = 2;
+}

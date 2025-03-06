@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package queries.order_details;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/queries/order_details";
+
+message OrderDetailsRequest{
+  string order_number = 1;
+}

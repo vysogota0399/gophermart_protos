@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package entities;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/entities";
+
+import "proto/entities/account.proto";
+import "proto/entities/order_states.proto";
+import "proto/common/uuid.proto";
+import "google/protobuf/timestamp.proto";
+import "vendor/github.com/googleapis/google/type/money.proto";
+
+message Order {
+  common.Uuid uuid                      = 1;
+  string number                         = 2;
+  OrderStates state                     = 3;
+  google.protobuf.Timestamp uploaded_at = 4;
+  Account account                       = 5;
+  google.type.Money accrual             = 6;
+}

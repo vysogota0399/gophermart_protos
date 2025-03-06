@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/common";
+
+message Uuid {
+  string value = 1;
+}

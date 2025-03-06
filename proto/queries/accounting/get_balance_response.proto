@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package queries.accounting;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/queries/accounting";
+
+import "vendor/github.com/googleapis/google/type/money.proto";
+
+message GetBalanceResponse {
+  google.type.Money balance     = 1;
+  google.type.Money withdrawn   = 2;
+}
