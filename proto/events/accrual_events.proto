@@ -1,30 +1,17 @@
 syntax = "proto3";
 
-option go_package = "gophermart_protos/gen/events";
+package events;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/events";
+
+import "proto/events/accrual_failed_event.proto";
+import "proto/events/accrual_finished_event.proto";
+import "proto/events/accrual_started_event.proto";
 
 message AccrualProcessed {
   oneof event {
-    StartedEvent started_event  = 1;
-    FinishedEvent finished_event = 2;
-    FailedEvent failed_event    = 3;
+    AccrualStartedEvent started_event  = 1;
+    AccrualFinishedEvent finished_event = 2;
+    AccrualFailedEvent failed_event    = 3;
   }
-}
-
-message StartedEvent {
-  string event_uuid   = 1;
-  string order_uuid   = 2;
-  string order_number = 3;
-}
-
-message FinishedEvent {
-  string event_uuid   = 1;
-  string order_uuid   = 2;
-  string order_number = 3;
-  int64 amount        = 4;
-}
-
-message FailedEvent {
-  string event_uuid   = 1;
-  string order_number = 2;
-  string order_uuid   = 3;
 }

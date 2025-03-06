@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package queries.accounting;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/queries/accounting";
+
+import "vendor/github.com/googleapis/google/type/money.proto";
+import "google/protobuf/timestamp.proto";
+
+message Withdrawal {
+  string order_number                    = 1;
+  google.type.Money sum                  = 2;
+  google.protobuf.Timestamp processed_at = 3;
+}

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: queries/orders/query_orders.proto
+// source: proto/queries/orders/query_orders.proto
 
 package orders
 
@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	QueryOrders_OrdersCollection_FullMethodName = "/QueryOrders/OrdersCollection"
+	QueryOrders_OrdersCollection_FullMethodName = "/queries.orders.QueryOrders/OrdersCollection"
 )
 
 // QueryOrdersClient is the client API for QueryOrders service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type QueryOrdersClient interface {
-	OrdersCollection(ctx context.Context, in *QueryOrdersParams, opts ...grpc.CallOption) (*QureyOrdersResponse, error)
+	OrdersCollection(ctx context.Context, in *QueryOrdersRequest, opts ...grpc.CallOption) (*QureyOrdersResponse, error)
 }
 
 type queryOrdersClient struct {
@@ -37,7 +37,7 @@ func NewQueryOrdersClient(cc grpc.ClientConnInterface) QueryOrdersClient {
 	return &queryOrdersClient{cc}
 }
 
-func (c *queryOrdersClient) OrdersCollection(ctx context.Context, in *QueryOrdersParams, opts ...grpc.CallOption) (*QureyOrdersResponse, error) {
+func (c *queryOrdersClient) OrdersCollection(ctx context.Context, in *QueryOrdersRequest, opts ...grpc.CallOption) (*QureyOrdersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(QureyOrdersResponse)
 	err := c.cc.Invoke(ctx, QueryOrders_OrdersCollection_FullMethodName, in, out, cOpts...)
@@ -51,7 +51,7 @@ func (c *queryOrdersClient) OrdersCollection(ctx context.Context, in *QueryOrder
 // All implementations must embed UnimplementedQueryOrdersServer
 // for forward compatibility.
 type QueryOrdersServer interface {
-	OrdersCollection(context.Context, *QueryOrdersParams) (*QureyOrdersResponse, error)
+	OrdersCollection(context.Context, *QueryOrdersRequest) (*QureyOrdersResponse, error)
 	mustEmbedUnimplementedQueryOrdersServer()
 }
 
@@ -62,7 +62,7 @@ type QueryOrdersServer interface {
 // pointer dereference when methods are called.
 type UnimplementedQueryOrdersServer struct{}
 
-func (UnimplementedQueryOrdersServer) OrdersCollection(context.Context, *QueryOrdersParams) (*QureyOrdersResponse, error) {
+func (UnimplementedQueryOrdersServer) OrdersCollection(context.Context, *QueryOrdersRequest) (*QureyOrdersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OrdersCollection not implemented")
 }
 func (UnimplementedQueryOrdersServer) mustEmbedUnimplementedQueryOrdersServer() {}
@@ -87,7 +87,7 @@ func RegisterQueryOrdersServer(s grpc.ServiceRegistrar, srv QueryOrdersServer) {
 }
 
 func _QueryOrders_OrdersCollection_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryOrdersParams)
+	in := new(QueryOrdersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -99,7 +99,7 @@ func _QueryOrders_OrdersCollection_Handler(srv interface{}, ctx context.Context,
 		FullMethod: QueryOrders_OrdersCollection_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryOrdersServer).OrdersCollection(ctx, req.(*QueryOrdersParams))
+		return srv.(QueryOrdersServer).OrdersCollection(ctx, req.(*QueryOrdersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -108,7 +108,7 @@ func _QueryOrders_OrdersCollection_Handler(srv interface{}, ctx context.Context,
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var QueryOrders_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "QueryOrders",
+	ServiceName: "queries.orders.QueryOrders",
 	HandlerType: (*QueryOrdersServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -117,5 +117,5 @@ var QueryOrders_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "queries/orders/query_orders.proto",
+	Metadata: "proto/queries/orders/query_orders.proto",
 }

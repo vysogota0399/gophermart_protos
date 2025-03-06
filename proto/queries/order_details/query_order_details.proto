@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package queries.order_details;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/queries/order_details";
+
+import "proto/queries/order_details/order_details_request.proto";
+import "proto/queries/order_details/order_details_response.proto";
+
+service QueryOrderDetails {
+  rpc OrderDetails(OrderDetailsRequest) returns (OrderDetailsResponse);
+}

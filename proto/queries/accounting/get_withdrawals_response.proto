@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package queries.accounting;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/queries/accounting";
+
+import "proto/queries/accounting/withdrawal.proto";
+
+message GetWithdrawalsResponse {
+  repeated Withdrawal withdrawals = 1;
+}

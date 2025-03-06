@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package entities;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/entities";
+
+enum TransactionOperations {
+  TRANSACTIONS_OPERATIONS_DEBIT   = 0;
+  TRANSACTIONS_OPERATIONS_CREDIT  = 1;
+}
