@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package events;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/events";
+
+import "proto/common/uuid.proto";
+import "vendor/github.com/googleapis/google/type/money.proto";
+
+message AccrualFinishedEvent {
+  common.Uuid event_uuid   = 1;
+  common.Uuid order_uuid   = 2;
+  string order_number      = 3;
+  google.type.Money amount = 4;
+}

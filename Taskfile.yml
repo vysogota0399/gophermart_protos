@@ -1,0 +1,98 @@
+version: '3'
+
+tasks:
+  generate_query_orders:
+    cmds:
+      - |
+        protoc -I ./ \
+          proto/queries/orders/query_orders_request.proto \
+          proto/queries/orders/query_orders_response.proto \
+          proto/entities/order.proto \
+          proto/entities/order_states.proto \
+          proto/entities/account.proto \
+          proto/common/uuid.proto \
+          proto/queries/orders/query_orders.proto \
+          --go_out=./gen \
+          --go_opt=module=github.com/vysogota0399/gophermart_protos/gen \
+          --go-grpc_out=./gen \
+          --go-grpc_opt=module=github.com/vysogota0399/gophermart_protos/gen
+
+  generate_query_accounting:
+    cmds:
+      - |
+        protoc -I ./ \
+          proto/queries/accounting/withdrawal.proto \
+          proto/queries/accounting/get_balance_params.proto \
+          proto/queries/accounting/get_balance_response.proto \
+          proto/queries/accounting/get_withdrawals_params.proto \
+          proto/queries/accounting/get_withdrawals_response.proto \
+          --go_out=./gen \
+          --go_opt=module=github.com/vysogota0399/gophermart_protos/gen \
+          --go-grpc_out=./gen \
+          --go-grpc_opt=module=github.com/vysogota0399/gophermart_protos/gen
+
+  generate_query_accounting_service:
+    cmd: protoc -I ./  proto/queries/accounting/query_accounting.proto --go_out=./gen --go_opt=module=github.com/vysogota0399/gophermart_protos/gen --go-grpc_out=./gen --go-grpc_opt=module=github.com/vysogota0399/gophermart_protos/gen
+
+  generate_order_command:
+    cmds:
+      - |
+        protoc -I ./ \
+          proto/commands/create_order/create_new_order_params.proto \
+          proto/commands/create_order/order_service.proto \
+          --go_out=./gen \
+          --go_opt=module=github.com/vysogota0399/gophermart_protos/gen \
+          --go-grpc_out=./gen \
+          --go-grpc_opt=module=github.com/vysogota0399/gophermart_protos/gen
+
+  generate_accrual_events:
+    cmds:
+      - |
+        protoc -I ./ \
+          proto/events/accrual_events.proto \
+          proto/events/accrual_failed_event.proto \
+          proto/events/accrual_finished_event.proto \
+          proto/events/accrual_started_event.proto \
+          --go_out=./gen \
+          --go_opt=module=github.com/vysogota0399/gophermart_protos/gen
+
+  generate_order_events:
+    cmds:
+      - |
+        protoc -I ./ \
+          proto/events/order_created_event.proto \
+          proto/events/order_updated_event.proto \
+          --go_out=./gen \
+          --go_opt=module=github.com/vysogota0399/gophermart_protos/gen
+
+  generate_transaction_events:
+    cmds:
+      - |
+        protoc -I ./ \
+          proto/entities/transaction_operations.proto \
+          proto/events/transaction_processed_event.proto \
+          --go_out=./gen \
+          --go_opt=module=github.com/vysogota0399/gophermart_protos/gen
+
+  generate_withdraw_command:
+    cmds:
+      - |
+        protoc -I ./ \
+          proto/commands/withdraw/do_withdraw_params.proto \
+          proto/commands/withdraw/withdraw_service.proto \
+          --go_out=./gen \
+          --go_opt=module=github.com/vysogota0399/gophermart_protos/gen \
+          --go-grpc_out=./gen \
+          --go-grpc_opt=module=github.com/vysogota0399/gophermart_protos/gen
+
+  generate_query_order_datails:
+    cmds:
+    - |
+      protoc -I ./ \
+        proto/queries/order_details/query_order_details.proto \
+        proto/queries/order_details/order_details_response.proto \
+        proto/queries/order_details/order_details_request.proto \
+        --go_out=./gen \
+        --go_opt=module=github.com/vysogota0399/gophermart_protos/gen \
+        --go-grpc_out=./gen \
+        --go-grpc_opt=module=github.com/vysogota0399/gophermart_protos/gen

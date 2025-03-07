@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package queries.orders;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/queries/orders";
+
+import "proto/queries/orders/query_orders_request.proto";
+import "proto/queries/orders/query_orders_response.proto";
+
+service QueryOrders {
+  rpc OrdersCollection(QueryOrdersRequest) returns (QureyOrdersResponse);
+}

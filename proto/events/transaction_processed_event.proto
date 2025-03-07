@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package events;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/events";
+
+
+import "proto/common/uuid.proto";
+import "vendor/github.com/googleapis/google/type/money.proto";
+import "proto/entities/account.proto";
+import "proto/entities/transaction_operations.proto";
+import "google/protobuf/timestamp.proto";
+
+message TransactionProcessed {
+  common.Uuid event_uuid                   = 1;
+  common.Uuid uuid                         = 2;
+  google.type.Money amount                 = 3;
+  entities.Account account                 = 4;
+  string order_number                      = 5;
+  entities.TransactionOperations operation = 6;
+  google.protobuf.Timestamp processed_at   = 7;
+}

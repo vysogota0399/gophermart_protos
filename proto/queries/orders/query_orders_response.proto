@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package queries.orders;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/queries/orders";
+
+import "proto/entities/order.proto";
+
+message QureyOrdersResponse {
+  repeated entities.Order orders = 1;
+}

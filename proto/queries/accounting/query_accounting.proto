@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package queries.accounting;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/queries/accounting";
+
+import "proto/queries/accounting/get_balance_params.proto";
+import "proto/queries/accounting/get_balance_response.proto";
+import "proto/queries/accounting/get_withdrawals_params.proto";
+import "proto/queries/accounting/get_withdrawals_response.proto";
+
+service QueryAccounting{
+  rpc GetBalance(GetBalanceParams) returns (GetBalanceResponse);
+  rpc GetWithdrawals(GetWithdrawalsParams) returns (GetWithdrawalsResponse);
+}

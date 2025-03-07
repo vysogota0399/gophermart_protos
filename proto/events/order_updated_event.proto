@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package events;
+
+option go_package = "github.com/vysogota0399/gophermart_protos/gen/events";
+
+import "proto/common/uuid.proto";
+import "proto/entities/order_states.proto";
+
+message OrderUpdated {
+  common.Uuid event_uuid      = 1;
+  common.Uuid uuid            = 2;
+  entities.OrderStates state  = 5;
+}
